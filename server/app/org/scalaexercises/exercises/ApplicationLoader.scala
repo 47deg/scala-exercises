@@ -17,7 +17,7 @@
 package org.scalaexercises.exercises
 
 import _root_.controllers._
-import cats.effect.{Blocker, ConcurrentEffect, ContextShift, IO}
+import cats.effect.{ConcurrentEffect, IO}
 import com.typesafe.config.ConfigFactory
 import doobie.util.ExecutionContexts
 import doobie.util.transactor.Transactor
@@ -39,6 +39,7 @@ import play.api.mvc.EssentialFilter
 import router.Routes
 
 import scala.concurrent.Future
+import cats.effect.Resource
 
 class ExercisesApplicationLoader extends ApplicationLoader {
   def load(context: Context) = {
@@ -69,7 +70,7 @@ class Components(context: Context)
   lazy val transactorResource = (for {
     ec <- ExecutionContexts.fixedThreadPool[IO](threadPool)
     cs = IO.contextShift(ec)
-    blocker <- Blocker[IO]
+    blocker <- Resource.unit[IO]
   } yield Transactor.fromDataSource[IO](dbApi.database("default").dataSource, ec, blocker)(
     implicitly,
     cs

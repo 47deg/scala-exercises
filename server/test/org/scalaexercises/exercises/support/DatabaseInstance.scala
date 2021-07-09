@@ -16,7 +16,7 @@
 
 package org.scalaexercises.exercises.support
 
-import cats.effect.{ContextShift, IO}
+import cats.effect.IO
 import doobie.util.transactor.Transactor
 import play.api.db.evolutions._
 import play.api.db.{Database, Databases}

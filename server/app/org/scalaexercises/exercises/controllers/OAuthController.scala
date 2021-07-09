@@ -16,7 +16,7 @@
 
 package org.scalaexercises.exercises.controllers
 
-import cats.effect.{ContextShift, IO}
+import cats.effect.IO
 import cats.implicits._
 import github4s.Github
 import org.scalaexercises.algebra.user.UserOps
